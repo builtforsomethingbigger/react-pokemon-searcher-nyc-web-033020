@@ -74,7 +74,7 @@ class PokemonPage extends React.Component {
           
           <label>HP</label> <input type="radio" value="hp" checked={this.state.radioBtnValue == "hp"} onChange={this.radioChangeHandler}/>
         <br />
-        <PokemonCollection pokemons={this.renderSearchedPokemon()} />
+        <PokemonCollection pokemons={this.renderSearchedPokemon()} onDoubleClick={this.renderPokemon} />
       </Container>
     )
   }

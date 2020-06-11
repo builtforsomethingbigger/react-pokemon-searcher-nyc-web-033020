@@ -1,6 +1,8 @@
 import React from 'react'
 import { Card } from 'semantic-ui-react'
 
+const API = 'http://localhost:3000/pokemon'
+
 class PokemonCard extends React.Component {
 
   state = {
@@ -13,6 +15,17 @@ class PokemonCard extends React.Component {
     })
   }
 
+  deletePokemon = e => {
+    fetch(`${API}/${this.props.id}`, {
+      method: 'DELETE',
+      headers: {
+        'content-type': 'application/json',
+        accept: 'application/json'
+      }
+    })
+    this.props.onDoubleClick()
+  }
+
   render(){
       let hp = {}
       hp = this.props.stats.find(stat => stat.name === 'hp')
@@ -23,7 +36,7 @@ class PokemonCard extends React.Component {
       // })
       return (
         <Card>
-          <div onClick={this.flipSprite}>
+          <div onClick={this.flipSprite} onDoubleClick={this.deletePokemon}>
             <div className="image">
               {this.state.clicked ? <img src={this.props.sprites.back} alt="oh no!" /> : <img src={this.props.sprites.front} alt="oh no!" />}
             </div>
